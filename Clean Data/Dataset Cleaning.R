@@ -1,6 +1,6 @@
 #### Read-Me ####
 ##  This script pulls in the CPDat and CSCP excel files saved on Github and 
-##  cleans them. It also contains code for data exploration of the two datasets.
+##  cleans them.
 ##  The cleaned datasets are exported and saved in the Cleaned Data folder on Github
 
 # Libraries we might need
