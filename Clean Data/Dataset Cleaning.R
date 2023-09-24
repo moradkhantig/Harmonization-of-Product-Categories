@@ -1,7 +1,7 @@
 #### Read-Me ####
-##  This script pulls in the CPDat and CSCP excel files saved on Github and 
+##  This script pulls in the CPDat excel files saved on Github and 
 ##  cleans them.
-##  The cleaned datasets are exported and saved in the Cleaned Data folder on Github
+##  The cleaned CPDat dataset is exported and saved in the Cleaned Data folder on Github
 
 # Libraries we might need
 if(!require(tidyverse)) install.packages("tidyverse", 
@@ -23,7 +23,7 @@ library(stringr)
 # From Github, download the CPDat files save them in a local directory. Note that
 # the working directory here is very similar to how the folders and files are organized
 # on Github. For the code to work create a working directory as follows:
-#     setwd("./Harmonization-of-Product-Categories/Raw Data/CPDat")
+#     ./Raw Data/CPDat
 setwd("C:/Users/tig_m/Documents/Data Science/R Captsone/Harmonization-of-Product-Categories/Raw Data/CPDat")
 
 # Read in the CPDat files
@@ -34,15 +34,6 @@ rep_uses <- read_excel(path = "functional_uses.xlsx")
 ingredients <- read_excel(path = "ingredients.xlsx")
 pred_uses <- read_excel(path = "predicted_functional_uses.xlsx")
 products <- read_excel(path = "products.xlsx")
-
-# From Github also download the California Safe Cosmetics Product Database (CSCP).
-# This is titled as "CDPH_Search_results.xlsx". This file is located in the Raw Data
-# folder. Download the file and save it in a local directory using the convention:
-#       setwd("./Harmonization-of-Product-Categories/Raw Data")
-setwd("C:/Users/tig_m/Documents/Data Science/R Captsone/Harmonization-of-Product-Categories/Raw Data")
-
-# Read in the CSCP dataset
-CSCP <- read_excel(path = "CDPH_Search_results.xlsx")
 
 # Now we construct a dataframe containing the CPDat data. For our purposes we
 # to have product names, product categories, and ingredients.
@@ -142,37 +133,3 @@ CPDat_Clean <- CPDat_Clean %>% rename(PreferredName = PREFERRED_NAME)
 CPDat_Clean$PreferredName <- ifelse(is.na(CPDat_Clean$PreferredName),"NA",CPDat_Clean$PreferredName)
 
 # Now we are done cleaning the CPDat_Clean dataframe
-
-### Now we clean the CSCP dataframe
-# Use the head function to inspect the first few rows of the CSCP dataframe
-head(CSCP)
-# An inspection of the first few rows of the dataframe indicates the presence of 
-# variant products. Variants are similar products but differ in certain aspects such
-# color. In this case we only want to keep one of the variants and remove the others.
-
-# First we remove Product Id and Variant columns since they are not needed
-CSCP <- CSCP %>% select(-`Product Id`,-Variant)
-
-# Then we use distinct and remove duplicates in the Company column
-CSCP <- distinct(CSCP,Company,.keep_all = TRUE)
-
-# Use the head function to see if duplicates were correctly removed
-head(CSCP)
-
-# Now assign a vector called Chemicals to hold the entries in the Ingredient Name
-# column to see if the entries in the Ingredient Name column need to be cleaned
-
-Chemicals <- CSCP$`Ingredient Name`
-Chemicals
-
-# An inspection of this vector shows a mixture of entries listing chemical names
-# along with their associated CAS numbers, chemical names by themselves without their
-# associated CAS numbers, and inconsistencies in chemical names. This will involve a manual
-# cleanup similar to the type of cleanup performed for the CPDat dataset above.
-
-# The CSCP dataset will be saved as a flat file in the following local directory
-#     ./Harmonization-of-Product-Categories/Raw Data
-
-setwd("C:/Users/tig_m/Documents/Data Science/R Captsone/Harmonization-of-Product-Categories/Raw Data")
-
-write_xlsx(CSCP,"CDPH.xlsx",col_names = TRUE,format_headers = TRUE,use_zip64 = FALSE)
