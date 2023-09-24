@@ -29,8 +29,6 @@ library(knitr)
 library(kableExtra)
 ```
 
-# Executive Summary
-
 # 1. Introduction
 
 In 2008, California passed the Green Chemistry law which authorized the Department of Toxic Substances Control (DTSC) to develop and implement regulations creating the Safer Consumer Products Program (SCP) (see [Safer Consumer Products Program Overview](https://dtsc.ca.gov/scp/)). These [regulations](https://govt.westlaw.com/calregs/Browse/Home/California/CaliforniaCodeofRegulations?guid=IAD4F8D705B6111EC9451000D3A7C4BC3&originationContext=documenttoc&transitionType=Default&contextData=(sc.Default)) are found in Title 22 Chapter 55 of the California Code of Regulations.
