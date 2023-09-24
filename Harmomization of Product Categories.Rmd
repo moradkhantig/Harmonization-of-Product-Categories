@@ -346,9 +346,14 @@ All codes, datasets, and data visualizations can be found by referring to the fo
 Supplementary data is also included as part of this report:
 
 Table S1: CPDat Comptox Batch Search Results
+
 Table S2: Distribution of chemicals in the most prevalent products in CPDat
-Table S3: Data visualization of the number of chemicals in products in CPDat
-Tables S4 and S5: Data visualizations of the number of Candidate Chemicals in products                   in CPDat
+
+Table S3: Products in CPDat with chemical counts less than 30
+
+Table S4: Products in CPDat with Candidate Chemicals counts between 10 and 100
+
+Table S5: Products in CPDat with Candidate Chemicals counts less than 10.
 
 \newpage
 
